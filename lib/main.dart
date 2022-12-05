@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:movil/views/courses_view/courses_view.dart';
 
+import 'views/config/app_router.dart';
+
 // Necesario para emulador samsung externo (Alines)
 class MyHttpoverrides extends HttpOverrides {
   @override
@@ -45,7 +47,7 @@ class _MyAppState extends State<MyApp> {
           primarySwatch: Colors.blue,
         ),
         //Generador de rutas para navegacion
-        //onGenerateRoute: AppRouter.onGenerateRoute,
+        onGenerateRoute: AppRouter.onGenerateRoute,
         // Screen Inicial
         initialRoute: 'home',
         routes: {
