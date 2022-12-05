@@ -21,24 +21,23 @@ class CoursesItem extends ItemView {
         child: ClipRRect(
             borderRadius: BorderRadius.circular(30),
             child: Column(children: <Widget>[
-              const FadeInImage(
-                // En esta propiedad colocamos la imagen a descargar
-                image: AssetImage('lib/assets/1.jpg'),
-
-                // En esta propiedad colocamos el gif o imagen de carga
-                // debe estar almacenado localmente
-                placeholder: AssetImage('lib/assets/1.jpg'),
-
-                // En esta propiedad colocamos mediante el objeto BoxFit
-                // la forma de acoplar la imagen en su contenedor
-                fit: BoxFit.cover,
-
-                // En esta propiedad colocamos el alto de nuestra imagen
-                height: 160,
+              FadeInImage(
+                image: verifyPhoto(course.photo),
+                placeholder: const AssetImage('lib/assets/ripple.gif'),
+                fit: BoxFit.fill,
               ),
               ListTile(
-                title: Text(course.title),
-                subtitle: Text(course.subtitle),
+                title: Text(
+                  course.title,
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+                subtitle: Text(
+                  course.subtitle,
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                ),
               )
             ])));
   }

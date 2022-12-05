@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../abstractions/grid_view.dart';
 import 'courses_item.dart';
 
+// ignore: must_be_immutable
 class CourseGrid extends GridsView {
   CourseGrid(List<dynamic> courses, {Key? key}) : super(courses, key: key);
 

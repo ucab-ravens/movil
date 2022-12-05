@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import '../../models/course_model.dart';
 import 'controller_adapter.dart';
 import '../course_controller.dart';
