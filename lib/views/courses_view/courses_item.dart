@@ -10,8 +10,6 @@ class CoursesItem extends ItemView {
 
   @override
   Widget build(BuildContext context) {
-    //Construir Doctor Item Widget a nivel grafico
-
     //Provider.of<CourseProvider>(context, listen: false).setCourseModel(course);
 
     return Card(
