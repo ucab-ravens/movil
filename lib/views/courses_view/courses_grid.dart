@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:movil/models/course_model.dart';
+import 'package:provider/provider.dart';
 
+import '../../provider/course_provider.dart';
 import '../abstractions/grid_view.dart';
 import 'courses_item.dart';
 
@@ -17,6 +20,8 @@ class CourseGrid extends GridsView {
             child: GestureDetector(
                 child: items[index],
                 onTap: () {
+                  Provider.of<CourseProvider>(context, listen: false)
+                      .setCourseModel(items[index] as CourseModel);
                   Navigator.of(context).pushNamed('/courseInfo');
                 }),
           );
