@@ -13,7 +13,7 @@ var data = {
         "1.4 chosen language to parse the sample data"
       ],
       "photo":
-          "https://globalmetropolitano.com/cms/wp-content/uploads/2017/03/user-icon.png"
+          "https://concepto.de/wp-content/uploads/2014/08/programacion-2-e1551291144973.jpg"
     },
     {
       "id": "2",
@@ -28,7 +28,7 @@ var data = {
         "2.4 chosen language to parse the sample data"
       ],
       "photo":
-          "https://globalmetropolitano.com/cms/wp-content/uploads/2017/03/user-icon.png"
+          "https://conceptoabc.com/wp-content/uploads/2021/07/Matematicas.jpg"
     },
     {
       "id": "3",
@@ -43,7 +43,7 @@ var data = {
         "3.4 chosen language to parse the sample data"
       ],
       "photo":
-          "https://globalmetropolitano.com/cms/wp-content/uploads/2017/03/user-icon.png"
+          "https://concepto.de/wp-content/uploads/2014/08/programacion-2-e1551291144973.jpg"
     },
     {
       "id": "1",
@@ -58,7 +58,7 @@ var data = {
         "1.4 chosen language to parse the sample data"
       ],
       "photo":
-          "https://globalmetropolitano.com/cms/wp-content/uploads/2017/03/user-icon.png"
+          "https://concepto.de/wp-content/uploads/2014/08/programacion-2-e1551291144973.jpg"
     },
     {
       "id": "2",
@@ -73,7 +73,7 @@ var data = {
         "2.4 chosen language to parse the sample data"
       ],
       "photo":
-          "https://globalmetropolitano.com/cms/wp-content/uploads/2017/03/user-icon.png"
+          "https://concepto.de/wp-content/uploads/2014/08/programacion-2-e1551291144973.jpg"
     },
     {
       "id": "3",
@@ -88,7 +88,7 @@ var data = {
         "3.4 chosen language to parse the sample data"
       ],
       "photo":
-          "https://globalmetropolitano.com/cms/wp-content/uploads/2017/03/user-icon.png"
+          "https://concepto.de/wp-content/uploads/2014/08/programacion-2-e1551291144973.jpg"
     },
   ]
 };

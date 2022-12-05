@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'item_view.dart';
 
+// ignore: must_be_immutable
 abstract class GridsView extends StatelessWidget {
   @protected
   late List<ItemView> items;
