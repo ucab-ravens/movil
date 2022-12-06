@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:movil/views/common/verify_connection.dart';
 
 ImageProvider verifyPhoto(String? photoRoute) {
+  var connection = verifyConnection();
+
   if (photoRoute!.isEmpty) {
-    return const NetworkImage(
-        'https://globalmetropolitano.com/cms/wp-content/uploads/2017/03/user-icon.png');
+    return const AssetImage('lib/assets/no_image.gif');
   } else {
     return NetworkImage(photoRoute);
   }

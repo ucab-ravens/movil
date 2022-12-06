@@ -43,7 +43,7 @@ class CoursesItem extends ItemView {
                 ]))),
         onTap: () {
           Provider.of<CourseProvider>(context, listen: false)
-              .setCourseModel(course);
+              .setCourseProvider(course);
           Navigator.of(context).pushNamed('/courseInfo');
         });
   }

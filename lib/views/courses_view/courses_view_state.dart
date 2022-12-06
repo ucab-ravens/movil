@@ -17,9 +17,7 @@ class CoursesViewState extends ViewState {
               return CustomScrollView(slivers: <Widget>[
                 viewHeader(),
                 const SliverToBoxAdapter(),
-                verifyData(
-                  snapshot,
-                )
+                verifyData(snapshot)
               ]);
             }));
   }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:movil/models/course_model.dart';
-import 'package:provider/provider.dart';
+//import 'package:movil/models/course_model.dart';
+//import 'package:provider/provider.dart';
 
-import '../../provider/course_provider.dart';
+//import '../../provider/course_provider.dart';
 import '../abstractions/grid_view.dart';
 import 'courses_item.dart';
 
@@ -17,13 +17,7 @@ class CourseGrid extends GridsView {
         (BuildContext context, int index) {
           return Padding(
             padding: const EdgeInsets.all(8.0),
-            child: GestureDetector(
-                child: items[index],
-                onTap: () {
-                  Provider.of<CourseProvider>(context, listen: false)
-                      .setCourseModel(items[index] as CourseModel);
-                  Navigator.of(context).pushNamed('/courseInfo');
-                }),
+            child: items[index],
           );
         },
         childCount: items.length,
