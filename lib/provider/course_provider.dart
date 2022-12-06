@@ -8,7 +8,7 @@ class CourseProvider {
   late List<dynamic> lessons;
   late String photo;
 
-  void setCourseModel(CourseModel model) {
+  void setCourseProvider(CourseModel model) {
     idCourse = model.idCourse;
     title = model.title;
     subtitle = model.subtitle;
