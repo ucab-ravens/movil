@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movil/modules/courses/domain/course.dart';
 import 'package:movil/modules/shared/header_view.dart';
-import 'package:movil/modules/shared/verify_image.dart';
 
 class CourseDetailView extends StatelessWidget {
   final Course course;

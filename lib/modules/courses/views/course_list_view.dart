@@ -19,12 +19,14 @@ class CourseListView extends StatelessWidget {
       return const Center(child: Text('No hay cursos publicados.'));
     }
 
-    return ListView.builder(
-      itemCount: courses.length,
-      itemBuilder: (context, index) {
-        final course = courses.elementAt(index);
-        return CourseCard(course);
-      },
+    return Expanded(
+      child: ListView.builder(
+        itemCount: courses.length,
+        itemBuilder: (context, index) {
+          final course = courses.elementAt(index);
+          return CourseCard(course);
+        },
+      ),
     );
   }
 }
