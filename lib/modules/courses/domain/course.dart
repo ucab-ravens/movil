@@ -1,11 +1,10 @@
-import 'package:movil/common/result.dart';
+import 'package:movil/modules/shared/domain/result.dart';
 import 'package:movil/modules/courses/domain/course_description.dart';
 import 'package:movil/modules/courses/domain/course_id.dart';
 import 'package:movil/modules/courses/domain/course_image.dart';
 import 'package:movil/modules/courses/domain/course_title.dart';
 
 class Course {
-
   CourseId id;
   CourseTitle title;
   CourseDescription description;
@@ -19,20 +18,20 @@ class Course {
     required this.description,
     required this.image,
   });
-  
+
   /// Método de fábrica para crear un [Course]
-  /// 
+  ///
   /// Usamos un try-catch por dos razones
   /// 1. Podemos lanzar excepciones de tipo [Exception] generadas
   ///    en los [ValueObject] y manejarlas en el catch
   /// 2. Al tratar de parsear un mapa a un [ValueObject] podemos
   ///    recibir un [FormatException] si el valor no es del tipo
-  ///    esperado 
-  /// 
+  ///    esperado
+  ///
   /// Envolvemos el resultado en un [Result], así no tendremos
   /// que usar try-catch en el resto de la aplicación
-  static Result<Course> fromMap(Map<String, dynamic> map) {    
-    try {      
+  static Result<Course> fromMap(Map<String, dynamic> map) {
+    try {
       // Validamos cada uno de los ValueObject
       final id = CourseId.create(map['id']).fold(
         (exception) => throw exception,
@@ -59,8 +58,7 @@ class Course {
           image: image,
         ),
       );
-    }
-    catch (e) {
+    } catch (e) {
       return Error(Exception('''[corsi]: Error al crear el curso. 
         No se ha podido parsear los datos. $e'''));
     }
@@ -76,8 +74,7 @@ class Course {
         'description': course.description.value,
         'image': course.image.value,
       });
-    }
-    catch (e) {
+    } catch (e) {
       return Error(Exception('''[corsi]: Error al convertir el curso a un mapa. 
         No se ha podido parsear los datos. $e'''));
     }
@@ -87,5 +84,4 @@ class Course {
   String toString() {
     return 'Course(\n\tid: ${id.toString()}, \n\ttitle: ${title.toString()}, \n\tdescription: ${description.toString()}, \n\timage: ${image.toString()}\n)';
   }
-
 }

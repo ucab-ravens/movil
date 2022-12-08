@@ -1,4 +1,4 @@
-import 'package:movil/common/result.dart';
+import 'package:movil/modules/shared/domain/result.dart';
 import 'package:movil/modules/courses/domain/course.dart';
 import 'package:movil/modules/courses/domain/course_id.dart';
 import 'package:movil/modules/local_storage/local_storage.dart';
