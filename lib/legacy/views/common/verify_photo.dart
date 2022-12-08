@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movil/views/common/verify_connection.dart';
+import 'package:movil/legacy/views/common/verify_connection.dart';
 
 ImageProvider verifyPhoto(String? photoRoute) {
   var connection = verifyConnection();

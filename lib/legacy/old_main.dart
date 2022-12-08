@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:movil/views/courses_view/courses_view.dart';
+import 'package:movil/legacy/views/courses_view/courses_view.dart';
 import 'package:provider/provider.dart';
 import 'provider/course_provider.dart';
 import 'views/config/app_router.dart';
