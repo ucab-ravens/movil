@@ -5,7 +5,6 @@ Future<bool> verifyConnection() async {
 
   if (connectivityResult == ConnectivityResult.none) {
     return Future<bool>.value(false);
-    ;
   } else {
     return Future<bool>.value(true);
   }

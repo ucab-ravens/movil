@@ -1,14 +1,17 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:movil/views/courses_view/courses_view.dart';
+import 'package:movil/modules/courses/data/course_repository_impl.dart';
+import 'package:movil/modules/courses/data/local/local_course_data_source.dart';
+import 'package:movil/modules/courses/data/remote/remote_course_data_source.dart';
+import 'package:movil/modules/courses/domain/course_repository.dart';
+import 'package:movil/modules/courses/services/course_service.dart';
+import 'package:movil/modules/local_storage/local_storage.dart';
 import 'package:provider/provider.dart';
-
-import 'provider/course_provider.dart';
-import 'views/config/app_router.dart';
+import 'modules/courses/views/course_provider.dart';
+import 'modules/shared/home_view.dart';
 
 // Necesario para emulador samsung externo (Alines)
-class MyHttpoverrides extends HttpOverrides {
+class CustomHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
     return super.createHttpClient(context)
@@ -17,20 +20,24 @@ class MyHttpoverrides extends HttpOverrides {
   }
 }
 
-void main() {
+final storage = LocalStorage();
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   // Necesario para emulador samsung externo (Alines)
-  HttpOverrides.global = MyHttpoverrides();
-  runApp(const MyApp());
+  HttpOverrides.global = CustomHttpOverrides();
+  await storage.open();
+  runApp(const CorsiApp());
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+class CorsiApp extends StatefulWidget {
+  const CorsiApp({Key? key}) : super(key: key);
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<CorsiApp> createState() => CorsiAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class CorsiAppState extends State<CorsiApp> {
   @override
   void initState() {
     super.initState();
@@ -39,22 +46,30 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-        providers: [
-          Provider(create: (context) => CourseProvider()),
-        ],
-        builder: (context, child) {
-          return MaterialApp(
-              title: 'Corsi',
-              theme: ThemeData(
-                primarySwatch: Colors.blue,
-              ),
-              //Generador de rutas para navegacion
-              onGenerateRoute: AppRouter.onGenerateRoute,
-              // Screen Inicial
-              initialRoute: 'home',
-              routes: {
-                'home': (_) => const CoursesView(),
-              });
-        });
+      providers: [
+        Provider<LocalStorage>(create: (_) => storage),
+        Provider<CourseRepository>(
+          create: (context) => CourseRepositoryImpl(
+            remote: RemoteCourseDataSource(),
+            local: LocalCourseDataSource(storage),
+          ),
+        ),
+        ChangeNotifierProvider<CourseProvider>(
+          create: (context) => CourseProvider(
+            CourseService(context.read<CourseRepository>()),
+          ),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Corsi',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        initialRoute: '/',
+        routes: {
+          '/': (_) => const HomeView(),
+        },
+      ),
+    );
   }
 }
