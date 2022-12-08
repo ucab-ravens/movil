@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../courses_view/courses_grid.dart';
 
 Widget verifyData(AsyncSnapshot snapshot) {
