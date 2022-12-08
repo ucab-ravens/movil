@@ -10,16 +10,54 @@ class LocalCourseDataSource {
 
   ResultAsync<Iterable<Course>> findAll() async {
     try {
-      // Hacemos un query crudo a la base de datos
-      final queryResult = await storage.query('SELECT * FROM courses');
-      final mappedCourses = queryResult.map((row) => Course.fromMap(row));
+      // Consulta para obtener los cursos con sus respectivas
+      // y posteriormente obtener una lista de sus lecciones
+      final courseQuery = await storage.query('''
+        SELECT * FROM courses
+      ''');
 
-      // Tenemos que verificar que cada curso sea válido
-      // ya que el método fromMap() puede retornar Error
+      // Mapeamos los cursos
+      final mappedCourses = courseQuery.map((row) async {
+        // Creamos una lista de lecciones
+        final List<String> lessons = [];
+        // Obtenemos las lecciones del curso
+        final lessonQuery = await storage.query('''
+          SELECT * FROM lessons WHERE course_id = ?
+        ''', [row['id']]);
+
+        print(lessonQuery);
+        // Mapeamos las lecciones
+        lessonQuery.map((row2) {
+          // Agregamos la lección a la lista
+          print('AYUDAAAAAAA');
+          print(row2['title']);
+          lessons.add(row2['title'] as String);
+        });
+
+        for (final lesson in lessonQuery) {
+          print('AYUDAAAA');
+          lessons.add(lesson['title']);
+        }
+
+        print(lessons);
+        // Retornamos el curso con sus lecciones
+        return Course.fromMap({
+          'id': row['id'],
+          'title': row['title'],
+          'subtitle': row['subtitle'],
+          'description': row['description'],
+          'image': row['image'],
+          'lessons': lessons
+        });
+      });
+
       final List<Course> courses = [];
+
       for (final course in mappedCourses) {
-        course.fold((error) => throw error, (course) => courses.add(course));
+        (await course)
+            .fold((error) => throw error, (course) => courses.add(course));
       }
+
       return Success(courses);
     } catch (_) {
       return Error(Exception(
@@ -45,14 +83,24 @@ class LocalCourseDataSource {
 
   ResultAsync<void> save(Course course) async {
     try {
+      // Insertamos el curso en la tabla courses
       await storage.insert(
-          'INSERT OR REPLACE INTO courses (id, title, description, image) VALUES (?, ?, ?, ?)',
+          'INSERT OR REPLACE INTO courses (id, title, subtitle, description, image) VALUES (?, ?, ?, ?, ?)',
           [
             course.id.value,
             course.title.value,
+            course.subtitle.value,
             course.description.value,
             course.image.value
           ]);
+
+      // Insertamos las lecciones en la tabla lessons
+      for (final lesson in course.lessons.value) {
+        await storage.insert(
+            'INSERT OR REPLACE INTO lessons (title, course_id) VALUES (?, ?)',
+            [lesson, course.id.value]);
+      }
+
       return const Success(null);
     } catch (_) {
       return Error(
@@ -79,6 +127,7 @@ class LocalCourseDataSource {
   ResultAsync<void> dump() async {
     try {
       await storage.delete('DELETE FROM courses');
+      await storage.delete('DELETE FROM lessons');
       return const Success(null);
     } catch (_) {
       return Error(

@@ -1,3 +1,5 @@
+import 'package:movil/modules/courses/domain/course_lessons.dart';
+import 'package:movil/modules/courses/domain/course_subtitle.dart';
 import 'package:movil/modules/shared/domain/result.dart';
 import 'package:movil/modules/courses/domain/course_description.dart';
 import 'package:movil/modules/courses/domain/course_id.dart';
@@ -7,17 +9,20 @@ import 'package:movil/modules/courses/domain/course_title.dart';
 class Course {
   CourseId id;
   CourseTitle title;
+  CourseSubtitle subtitle;
   CourseDescription description;
   CourseImage image;
+  CourseLessons lessons;
 
   /// Construtor privado del agregado [Course]
   /// Lo llamaremos dentro de nuestros métodos de fábrica
-  Course._constructor({
-    required this.id,
-    required this.title,
-    required this.description,
-    required this.image,
-  });
+  Course._constructor(
+      {required this.id,
+      required this.title,
+      required this.subtitle,
+      required this.description,
+      required this.image,
+      required this.lessons});
 
   /// Método de fábrica para crear un [Course]
   ///
@@ -41,6 +46,10 @@ class Course {
         (exception) => throw exception,
         (value) => value,
       );
+      final subtitle = CourseSubtitle.create(map['subtitle']).fold(
+        (exception) => throw exception,
+        (value) => value,
+      );
       final description = CourseDescription.create(map['description']).fold(
         (exception) => throw exception,
         (value) => value,
@@ -49,18 +58,24 @@ class Course {
         (exception) => throw exception,
         (value) => value,
       );
+      final CourseLessons lessons = CourseLessons.create(map['lessons']).fold(
+        (exception) => throw exception,
+        (value) => value,
+      );
 
       return Success(
         Course._constructor(
           id: id,
           title: title,
+          subtitle: subtitle,
           description: description,
           image: image,
+          lessons: lessons,
         ),
       );
     } catch (e) {
-      return Error(Exception('''[corsi]: Error al crear el curso. 
-        No se ha podido parsear los datos. $e'''));
+      return Error(Exception('Error al crear el curso.'
+          'No se ha podido parsear los datos. $e'));
     }
   }
 

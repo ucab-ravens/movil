@@ -19,7 +19,8 @@ class LocalStorage {
         // Creamos el esquema de la base de datos
         // ejecutado solo la primera vez que se
         // crea el archivo .db
-        await db.execute(databaseConfig['scheme'] as String);
+        await db.execute(databaseConfig['course_scheme'] as String);
+        await db.execute(databaseConfig['lesson_scheme'] as String);
       },
     );
     return _database;

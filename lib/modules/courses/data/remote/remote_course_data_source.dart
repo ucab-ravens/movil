@@ -26,12 +26,22 @@ class RemoteCourseDataSource {
       if (response.statusCode == 200) {
         final json = jsonDecode(response.body) as List;
 
-        final maps = json.map((item) => {
-              'id': item['id'],
-              'title': item['title'],
-              'description': item['description'],
-              'image': 'image',
-            });
+        final maps = json.map((item) {
+          final List<String> lessons = [];
+
+          for (var lesson in item['lessons']) {
+            lessons.add(lesson['title']);
+          }
+
+          return {
+            'id': item['id'],
+            'title': item['title'],
+            'subtitle': item['subtitle'],
+            'description': item['description'],
+            'image': item['image'],
+            'lessons': lessons
+          };
+        });
 
         final List<Course> courses = [];
         for (var map in maps) {
@@ -69,8 +79,9 @@ class RemoteCourseDataSource {
         final map = {
           'id': json['id'],
           'title': json['title'],
+          'subtitle': json['subtitle'],
           'description': json['description'],
-          'image': 'image',
+          'image': json['image'],
         };
 
         return Course.fromMap(map)
