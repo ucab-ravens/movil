@@ -1,4 +1,4 @@
-import 'package:movil/common/result.dart';
+import 'package:movil/modules/shared/domain/result.dart';
 import 'package:movil/modules/courses/data/local/local_course_data_source.dart';
 import 'package:movil/modules/courses/data/remote/remote_course_data_source.dart';
 import 'package:movil/modules/courses/domain/course.dart';
@@ -6,8 +6,7 @@ import 'package:movil/modules/courses/domain/course_id.dart';
 import 'package:movil/modules/courses/domain/course_repository.dart';
 
 class CourseRepositoryImpl implements CourseRepository {
-
-  final RemoteCourseDataSource remote; 
+  final RemoteCourseDataSource remote;
   final LocalCourseDataSource local;
 
   CourseRepositoryImpl({
@@ -34,21 +33,18 @@ class CourseRepositoryImpl implements CourseRepository {
   }
 
   @override
-  ResultAsync<Course> findById(CourseId id) async {    
+  ResultAsync<Course> findById(CourseId id) async {
     // Primero intentamos obtener el curso desde el almacenamiento remoto
     final remoteResult = await remote.findById(id);
     var result = remoteResult;
 
     // Si la petición fue exitosa, guardamos el curso en el almacenamiento local
-    // y retornamos el curso    
-    remoteResult.fold(
-      (error) async {
-        // Si la petición falló, intentamos obtener el curso desde el almacenamiento local
-        result = await local.findById(id);
-      },
-      (course) async => await local.save(course)
-    );
+    // y retornamos el curso
+    remoteResult.fold((error) async {
+      // Si la petición falló, intentamos obtener el curso desde el almacenamiento local
+      result = await local.findById(id);
+    }, (course) async => await local.save(course));
 
-    return result;    
+    return result;
   }
 }

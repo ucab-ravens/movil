@@ -6,9 +6,9 @@ import 'package:movil/modules/courses/data/remote/remote_course_data_source.dart
 import 'package:movil/modules/courses/domain/course_repository.dart';
 import 'package:movil/modules/courses/services/course_service.dart';
 import 'package:movil/modules/local_storage/local_storage.dart';
+import 'package:movil/modules/shared/views/home_view.dart';
 import 'package:provider/provider.dart';
 import 'modules/courses/views/course_provider.dart';
-import 'modules/shared/home_view.dart';
 
 // Necesario para emulador samsung externo (Alines)
 class CustomHttpOverrides extends HttpOverrides {

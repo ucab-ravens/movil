@@ -22,8 +22,7 @@ class CourseCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15),
                 child: Column(children: <Widget>[
                   CachedNetworkImage(
-                    imageUrl:
-                        'https://concepto.de/wp-content/uploads/2014/08/programacion-2-e1551291144973.jpg',
+                    imageUrl: course.image.value,
                     placeholder: (context, url) =>
                         const CircularProgressIndicator(),
                     errorWidget: (context, url, error) =>
@@ -37,7 +36,7 @@ class CourseCard extends StatelessWidget {
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                     subtitle: Text(
-                      course.title.value,
+                      course.subtitle.value,
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.ellipsis,
                     ),
