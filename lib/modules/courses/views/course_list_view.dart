@@ -20,12 +20,13 @@ class CourseListView extends StatelessWidget {
     }
 
     return Expanded(
-        child: ListView.builder(
-      itemCount: courses.length,
-      itemBuilder: (context, index) {
-        final course = courses.elementAt(index);
-        return CourseCard(course);
-      },
-    ));
+      child: ListView.builder(
+        itemCount: courses.length,
+        itemBuilder: (context, index) {
+          final course = courses.elementAt(index);
+          return CourseCard(course);
+        },
+      ),
+    );
   }
 }
