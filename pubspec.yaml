@@ -1,5 +1,5 @@
 name: movil
-description: A new Flutter project.
+description: Plataforma de cursos en línea
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -38,6 +38,13 @@ dependencies:
   cupertino_icons: ^1.0.2
   provider: ^6.0.4
   connectivity_plus: ^3.0.2
+  fpdart: ^0.3.0
+  http: ^0.13.5
+  sqflite: ^2.2.2
+  path: ^1.8.2
+  sqflite_common_ffi: ^2.2.0+1
+  internet_connection_checker: ^1.0.0+1
+  cached_network_image: ^3.2.3
 
 dev_dependencies:
   flutter_test:
