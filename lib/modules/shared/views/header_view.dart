@@ -17,7 +17,7 @@ class HeaderView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: const [
           SizedBox(width: 5),
-          Text('Corsi'),
+          Text('Corsi'),    // Este widget no se utiliza
         ],
       )),
     );

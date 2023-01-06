@@ -11,6 +11,13 @@ class CourseCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+            MaterialPageRoute(
+              builder: (context) => CourseDetailView(course)
+              ));
+      },
         child: Card(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -42,11 +49,6 @@ class CourseCard extends StatelessWidget {
                     ),
                   )
                 ]))),
-        onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => CourseDetailView(course)));
-        });
+    );
   }
 }

@@ -52,7 +52,7 @@ class HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text("Corsi"), centerTitle: true),
+        // appBar: AppBar(title: const Text("Corsi"), centerTitle: true),
         body: Column(
           children: [
             Container(

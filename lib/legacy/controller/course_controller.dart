@@ -1,5 +1,5 @@
 //import 'package:http/http.dart' as http;
-import '../../fakeAPI/data.dart';
+import '../FAKEAPI/data.dart';
 import 'controller.dart';
 
 class CourseController implements Controller<String> {
