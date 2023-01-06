@@ -61,6 +61,7 @@ class CorsiAppState extends State<CorsiApp> {
         ),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Corsi',
         theme: ThemeData(
           primarySwatch: Colors.blue,

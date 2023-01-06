@@ -11,8 +11,10 @@ class CourseDetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+          title: const Text('Course Details'),
+        ),
         body: CustomScrollView(slivers: <Widget>[
-      const HeaderView(),
       SliverToBoxAdapter(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
