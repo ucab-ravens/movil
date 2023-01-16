@@ -72,7 +72,7 @@ class CourseDetailView extends StatelessWidget {
                                                       YoutubePlayerController(
                                                     initialVideoId: YoutubePlayer
                                                         .convertUrlToId(
-                                                            'https://www.youtube.com/watch?v=QH2-TGUlwu4')!,
+                                                            'https://www.youtube.com/watch?v=dQw4w9WgXcQ')!,
                                                     flags:
                                                         const YoutubePlayerFlags(
                                                       autoPlay: true,
