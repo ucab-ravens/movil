@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movil/modules/courses/domain/course.dart';
 import 'package:movil/modules/courses/views/course_detail_view.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class CourseCard extends StatelessWidget {
   final Course course;
@@ -44,10 +45,33 @@ class CourseCard extends StatelessWidget {
                   )
                 ]))),
         onTap: () {
+          /*
           Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => CourseDetailView(course)));
+        }*/
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => YoutubePlayer(
+                        controller: YoutubePlayerController(
+                          initialVideoId: YoutubePlayer.convertUrlToId(
+                              'https://www.youtube.com/watch?v=QH2-TGUlwu4')!,
+                          flags: const YoutubePlayerFlags(
+                            autoPlay: true,
+                            mute: false,
+                          ),
+                        ),
+                        showVideoProgressIndicator: true,
+                        progressIndicatorColor: Colors.amber,
+                        progressColors: const ProgressBarColors(
+                            playedColor: Colors.amber,
+                            handleColor: Colors.amberAccent),
+                        onReady: () {
+                          print('Player is ready.');
+                        },
+                      )));
         });
   }
 }

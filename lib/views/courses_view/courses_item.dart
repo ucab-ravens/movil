@@ -5,7 +5,6 @@ import '../../models/course_model.dart';
 import '../../provider/course_provider.dart';
 import '../abstractions/item_view.dart';
 import '../common/verify_photo.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class CoursesItem extends ItemView {
   final CourseModel course;
@@ -43,12 +42,9 @@ class CoursesItem extends ItemView {
                   )
                 ]))),
         onTap: () {
-          //play video
-
-          /*
           Provider.of<CourseProvider>(context, listen: false)
               .setCourseProvider(course);
-          Navigator.of(context).pushNamed('/courseInfo');*/
+          Navigator.of(context).pushNamed('/courseInfo');
         });
   }
 }
