@@ -16,7 +16,8 @@ class CourseListView extends StatelessWidget {
     }
 
     if (courses.isEmpty) {
-      return const Center(child: Text('No hay cursos publicados.'));
+      return const Center(
+          child: Image(image: AssetImage('lib/assets/no_courses.png')));
     }
 
     return Expanded(
