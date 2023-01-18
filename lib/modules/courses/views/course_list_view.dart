@@ -12,11 +12,14 @@ class CourseListView extends StatelessWidget {
         context.select((CourseProvider provider) => provider.courses);
 
     if (courses == null) {
-      return const Center(child: CircularProgressIndicator());
+      return const Center(
+          child: Image(image: AssetImage('lib/assets/no_courses.png')));
+      //return const Center(child: CircularProgressIndicator());
     }
 
     if (courses.isEmpty) {
-      return const Center(child: Text('No hay cursos publicados.'));
+      return const Center(
+          child: Image(image: AssetImage('.../no_courses.png')));
     }
 
     return Expanded(
