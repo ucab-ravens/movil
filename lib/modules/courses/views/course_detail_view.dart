@@ -13,7 +13,7 @@ class CourseDetailView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Course Details'),
+          title: Text(course.title.value),
         ),
         body: CustomScrollView(slivers: <Widget>[
           SliverToBoxAdapter(
