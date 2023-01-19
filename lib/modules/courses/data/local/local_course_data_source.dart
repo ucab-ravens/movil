@@ -1,3 +1,4 @@
+import 'package:movil/modules/courses/domain/course_lessons.dart';
 import 'package:movil/modules/shared/domain/result.dart';
 import 'package:movil/modules/courses/domain/course.dart';
 import 'package:movil/modules/courses/domain/course_id.dart';
@@ -19,27 +20,32 @@ class LocalCourseDataSource {
       // Mapeamos los cursos
       final mappedCourses = courseQuery.map((row) async {
         // Creamos una lista de lecciones
-        final List<String> lessons = [];
+        final List<Lesson> lessons = [];
         // Obtenemos las lecciones del curso
         final lessonQuery = await storage.query('''
           SELECT * FROM lessons WHERE course_id = ?
         ''', [row['id']]);
 
-        print(lessonQuery);
         // Mapeamos las lecciones
-        lessonQuery.map((row2) {
-          // Agregamos la lección a la lista
-          print('AYUDAAAAAAA');
-          print(row2['title']);
-          lessons.add(row2['title'] as String);
-        });
+        //lessonQuery.map((rawLesson) {
+        //  // Agregamos la lección a la lista
+        //  print('mapping');
+        //  lessons.add(Lesson(
+        //    title: rawLesson['title'] as String, 
+        //    description: rawLesson['description'] as String,
+        //    videoUrl: rawLesson['video_url'] as String,
+        //  ));
+        //});
 
-        for (final lesson in lessonQuery) {
-          print('AYUDAAAA');
-          lessons.add(lesson['title']);
+        for (final rawLesson in lessonQuery) {
+          print('mapping!');
+          lessons.add(Lesson(
+            title: rawLesson['title'] as String, 
+            description: rawLesson['description'] as String,
+            videoUrl: rawLesson['video_url'] as String,
+          ));
         }
 
-        print(lessons);
         // Retornamos el curso con sus lecciones
         return Course.fromMap({
           'id': row['id'],
@@ -97,8 +103,8 @@ class LocalCourseDataSource {
       // Insertamos las lecciones en la tabla lessons
       for (final lesson in course.lessons.value) {
         await storage.insert(
-            'INSERT OR REPLACE INTO lessons (title, course_id) VALUES (?, ?)',
-            [lesson, course.id.value]);
+            'INSERT OR REPLACE INTO lessons (title, course_id, description, video_url) VALUES (?, ?, ?, ?)',
+            [lesson.title, course.id.value, lesson.description, lesson.videoUrl]);
       }
 
       return const Success(null);
