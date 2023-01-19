@@ -13,7 +13,7 @@ class CourseDetailView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Course Details'),
+          title: Text(course.title.value),
         ),
         body: CustomScrollView(slivers: <Widget>[
           SliverToBoxAdapter(
@@ -62,7 +62,7 @@ class CourseDetailView extends StatelessWidget {
                             padding: const EdgeInsets.only(left: 15, right: 15),
                             child: Card(
                               child: ListTile(
-                                  title: Text(lesson),
+                                  title: Text(lesson.title),
                                   onTap: () {
                                     Navigator.push(
                                         context,
@@ -72,7 +72,7 @@ class CourseDetailView extends StatelessWidget {
                                                       YoutubePlayerController(
                                                     initialVideoId: YoutubePlayer
                                                         .convertUrlToId(
-                                                            'https://www.youtube.com/watch?v=dQw4w9WgXcQ')!,
+                                                            lesson.videoUrl)!,
                                                     flags:
                                                         const YoutubePlayerFlags(
                                                       autoPlay: true,

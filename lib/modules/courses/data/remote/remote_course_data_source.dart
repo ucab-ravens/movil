@@ -1,4 +1,5 @@
 import 'package:http/http.dart' as http;
+import 'package:movil/modules/courses/domain/course_lessons.dart';
 import 'package:movil/modules/shared/domain/result.dart';
 import 'package:movil/modules/courses/domain/course.dart';
 import 'dart:convert';
@@ -6,7 +7,7 @@ import 'dart:convert';
 import 'package:movil/modules/courses/domain/course_id.dart';
 
 class RemoteCourseDataSource {
-  final String _url = 'https://corsi.onrender.com';
+  final String _url = 'https://corsi-soa2.onrender.com';
   final String _token =
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTIwOCwiZmlyc3RfbmFtZSI6Ikxlb25hcmRvIiwibGFzdF9uYW1lIjoiTGFycmFkIiwiZW1haWwiOiJsZW9uYXJkb2xhcnJhZEBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpc19hY3RpdmUiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDIyLTEwLTI3VDA5OjU4OjI5Ljk2OVoiLCJ1cGRhdGVkX2F0IjoiMjAyMi0xMC0yN1QwOTo1ODoyOS45NjlaIiwiaWF0IjoxNjY2ODc2OTIyfQ.vM1CEQkmsj192G9NnAf_Z5WMjxVOT8lUrwKvJAWZ1Lc';
   final http.Client _httpClient;
@@ -14,31 +15,34 @@ class RemoteCourseDataSource {
   RemoteCourseDataSource() : _httpClient = http.Client();
 
   ResultAsync<Iterable<Course>> findAll() async {
-    final uri = Uri.parse('$_url/api/courses');
+    final uri = Uri.parse('$_url/courses');
     final headers = {
-      'Authorization': 'Bearer $_token',
+      //'Authorization': 'Bearer $_token',
       'Content-Type': 'application/json'
     };
 
     try {
       final response = await _httpClient.get(uri, headers: headers);
-
+      print(response.statusCode);
       if (response.statusCode == 200) {
         final json = jsonDecode(response.body) as List;
 
         final maps = json.map((item) {
-          final List<String> lessons = [];
+          final List<Lesson> lessons = [];
 
           for (var lesson in item['lessons']) {
-            lessons.add(lesson['title']);
+            lessons.add(Lesson(
+              title: lesson['title'], 
+              description: item['description'], 
+              videoUrl: lesson['videoUrl']));
           }
 
           return {
-            'id': item['id'],
+            'id': int.parse(item['courseId']),
             'title': item['title'],
-            'subtitle': item['subtitle'],
+            'subtitle': '',
             'description': item['description'],
-            'image': item['image'],
+            'image': item['imageUrl'],
             'lessons': lessons
           };
         });
@@ -58,6 +62,7 @@ class RemoteCourseDataSource {
             'Error al obtener los cursos desde el servidor. $response'));
       }
     } catch (e) {
+      
       return Error(Exception(
           'Error al obtener los cursos desde la fuente de datos. $e'));
     }
@@ -66,7 +71,7 @@ class RemoteCourseDataSource {
   ResultAsync<Course> findById(CourseId id) async {
     final uri = Uri.parse('$_url/api/courses/${id.value}');
     final headers = {
-      'Authorization': 'Bearer $_token',
+      //'Authorization': 'Bearer $_token',
       'Content-Type': 'application/json'
     };
 
